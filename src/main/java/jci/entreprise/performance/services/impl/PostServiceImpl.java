@@ -3,9 +3,11 @@ package jci.entreprise.performance.services.impl;
 import jci.entreprise.performance.entities.Post;
 import jci.entreprise.performance.entities.PostCategory;
 import jci.entreprise.performance.services.PostService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class PostServiceImpl implements PostService {
     @Override
     public void createPost(Post post) {

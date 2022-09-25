@@ -1,6 +1,7 @@
 package jci.entreprise.performance.entities;
 
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,6 +28,7 @@ public class User {
     private  String password ;
     @NotNull
     private String email ;
+    @Nullable
     private Instant createDate ;
     private String role ;
 }

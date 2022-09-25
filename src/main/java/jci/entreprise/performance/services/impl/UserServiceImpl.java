@@ -4,18 +4,19 @@ import jci.entreprise.performance.entities.User;
 import jci.entreprise.performance.repositories.UserRepository;
 import jci.entreprise.performance.services.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
-@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    private final UserService userService ;
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder ;
+    @Autowired
+    private  UserRepository userRepository;
+    @Autowired
+    private  PasswordEncoder passwordEncoder ;
     @Override
     public ResponseEntity<String> createUser(User user) {
         boolean exist= userRepository.existsByEmail(user.getEmail());

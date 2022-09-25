@@ -3,9 +3,11 @@ package jci.entreprise.performance.services.impl;
 import jci.entreprise.performance.entities.Comment;
 import jci.entreprise.performance.services.CommentService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CommentServiceImpl implements CommentService {
     @Override
     public ResponseEntity<String> createComment(Comment comment) {
