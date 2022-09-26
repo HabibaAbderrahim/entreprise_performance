@@ -38,13 +38,34 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<String> deleteUser(Long id) {
 
-        return null;
+        if(!userRepository.existsById(id)){
+            return  ResponseEntity.badRequest().body("This User doesn't exist!!");
+        }
+        userRepository.deleteById(id);
+        return ResponseEntity.ok().body("User deleted succefully");
+
     }
 
     @Override
     public ResponseEntity<String> updateUser(User user) {
 
-        return null;
+        if( !(userRepository.existsByEmailAndUserId(user.getEmail(),user.getUserId()))){
+            if(userRepository.existsByEmail(user.getEmail())){
+                return  ResponseEntity.badRequest().body("This Useremail  exist  , choose another @!!");
+
+            }
+        }
+        if( !(userRepository.existsByUsernameAndUserId(user.getUsername(),user.getUserId()))){
+            if(userRepository.existsByUsername(user.getUsername())){
+                return  ResponseEntity.badRequest().body("This Username exist , choose another name!!");
+
+            }
+        }
+
+        userRepository.save(user);
+        return ResponseEntity.ok().body("User"+user.getUsername()+" updated succefully");
+
+
     }
 
     @Override
