@@ -13,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class PostController {
 
     final private PostService postService ;
-    final private ImageService imageService ;
     final private UploadFileController uploadFileController ;
 
 
