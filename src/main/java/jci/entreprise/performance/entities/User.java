@@ -7,10 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.Instant;
 
 @Data
@@ -24,6 +21,8 @@ public class User {
     private  Long userId ;
     @NotNull
     private String username ;
+    @Column(nullable = true, length = 64)
+    private String photos;
     @NotNull
     private  String password ;
     @NotNull
@@ -31,4 +30,11 @@ public class User {
     @Nullable
     private Instant createDate ;
     private String role ;
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (photos == null || userId == null) return null;
+
+        return "/user-photos/" + userId + "/" + photos;
+    }
 }

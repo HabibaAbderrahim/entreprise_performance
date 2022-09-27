@@ -2,26 +2,45 @@ package jci.entreprise.performance.services.impl;
 
 import jci.entreprise.performance.entities.Post;
 import jci.entreprise.performance.entities.PostCategory;
+import jci.entreprise.performance.entities.UploadedFile;
+import jci.entreprise.performance.repositories.PostRepository;
+import jci.entreprise.performance.services.FileUploadService;
+import jci.entreprise.performance.services.ImageService;
 import jci.entreprise.performance.services.PostService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class PostServiceImpl implements PostService {
+    final private PostRepository postRepository;
+    final private ImageService imageService ;
+    final private FileUploadService fileUploadService;
     @Override
-    public void createPost(Post post) {
+    public ResponseEntity<String> createPost(Post post ,MultipartFile file ) {
+
+        UploadedFile img = fileUploadService.uploadToDb(file);
+        post.setPostImage(img);
+        postRepository.save(post);
+        return ResponseEntity.status(HttpStatus.OK).body("Post saved succesfully") ;
 
     }
 
     @Override
-    public void deletePost(Long id) {
+    public ResponseEntity<String> deletePost(Long id) {
 
+        return null;
     }
 
     @Override
-    public void updatePost(Post post) {
+    public ResponseEntity<String> updatePost(Post post) {
 
+        return null;
     }
 
     @Override
