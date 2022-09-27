@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 public class PostServiceImpl implements PostService {
     final private PostRepository postRepository;
-    final private ImageService imageService ;
     final private FileUploadService fileUploadService;
     @Override
     public ResponseEntity<String> createPost(Post post ,MultipartFile file ) {
