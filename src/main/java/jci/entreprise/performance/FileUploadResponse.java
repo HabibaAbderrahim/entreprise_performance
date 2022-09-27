@@ -2,7 +2,7 @@ package jci.entreprise.performance;
 
 public class FileUploadResponse {
 
-    private String fileId;
+    private Long fileId;
     private String fileType;
     private String message;
     private boolean uploadStatus;
@@ -11,11 +11,11 @@ public class FileUploadResponse {
     public FileUploadResponse() {
     }
 
-    public String getFileId() {
+    public Long getFileId() {
         return fileId;
     }
 
-    public void setFileId(String fileId) {
+    public void setFileId(Long fileId) {
         this.fileId = fileId;
     }
 

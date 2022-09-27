@@ -6,13 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Entity
-public class UploadedFile {
+public class UploadedFile  implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

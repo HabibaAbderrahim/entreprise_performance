@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Entity
-public class Post {
+public class Post  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long postId ;
@@ -30,7 +31,7 @@ public class Post {
     private String description ;
     //one to one
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn( name="image" , referencedColumnName = "fileId" )
+    @JoinColumn( name="uploadedFile" , referencedColumnName = "fileId" )
     private UploadedFile postImage ;
     //one to one
     private PostCategory postCategory ;

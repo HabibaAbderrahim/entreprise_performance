@@ -20,10 +20,8 @@ public class PostServiceImpl implements PostService {
     final private PostRepository postRepository;
     final private FileUploadService fileUploadService;
     @Override
-    public ResponseEntity<String> createPost(Post post ,MultipartFile file ) {
+    public ResponseEntity<String> createPost(Post post) {
 
-        UploadedFile img = fileUploadService.uploadToDb(file);
-        post.setPostImage(img);
         postRepository.save(post);
         return ResponseEntity.status(HttpStatus.OK).body("Post saved succesfully") ;
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface PostService {
     //Admin
-    public ResponseEntity<String>  createPost(Post post , MultipartFile file );//admin
+    public ResponseEntity<String>  createPost(Post post);//admin
     public ResponseEntity<String>  deletePost(Long id);//admin
     public ResponseEntity<String>  updatePost(Post post);//admin
     public List<Post> getAllPosts(); //admin user

@@ -31,7 +31,7 @@ public class UploadFileController {
                     .path(uploadedFile.getFileId().toString())
                     .toUriString();
             response.setDownloadUri(downloadUri);
-            response.setFileId(uploadedFile.getFileId().toString());
+            response.setFileId(uploadedFile.getFileId());
             response.setFileType(uploadedFile.getFileType());
             response.setUploadStatus(true);
             response.setMessage("File Uploaded Successfully!");
@@ -41,6 +41,8 @@ public class UploadFileController {
         response.setMessage("Oops 1 something went wrong please re-upload.");
         return response;
     }
+
+
     @GetMapping("/download/{id}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String id)
     {
