@@ -14,7 +14,6 @@ public interface PostRepository extends JpaRepository<Post,Long> {
     public List<Post> findByPostCategory(PostCategory category);
     public List<Post> findByPostNameContainingIgnoreCase(String postName);
     public List<Post> findAll(Sort sort); //arrow
-    //public List<Post> findByOrderByCreatedDateDesc(Date date);
 
 
 

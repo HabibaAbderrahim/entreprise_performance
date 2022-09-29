@@ -5,15 +5,11 @@ import jci.entreprise.performance.repositories.UserRepository;
 import jci.entreprise.performance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
+import java.util.List;
 
 @RestController
-@RequestMapping("/apis/user")
-///api/auth/signup
+@RequestMapping("/api/user")
 public class UserController {
 
     @Autowired
@@ -26,20 +22,28 @@ public class UserController {
         return userService.createUser(user);
 
     }
-    @PostMapping("/addwithImage")
-    public ResponseEntity<String> addWImg(@RequestBody User user , @RequestParam("image") MultipartFile multipartFile) throws IOException{
-
-        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-        user.setPhotos(fileName);
-
-        User savedUser = userRepository.save(user);
-        String uploadDir = "user-photos/" + savedUser.getUserId();
-
-        //FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
-        return userService.createUser(user);
-
+    @PutMapping("/update")
+    public ResponseEntity<String> update(@RequestBody User user){
+        return userService.updateUser(user);
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        return userService.deleteUser(id);
+    }
+
+    @GetMapping("/getAllUsers")
+    public List<User> getAllUsers(){
+        return userService.getAllUser();
+    }
+
+    @GetMapping("/getOneUser/{id}")
+    public ResponseEntity<?> getOneUser(@PathVariable Long id){
+        return userService.getUserById(id);
+    }
+
+
+
 }
 
 

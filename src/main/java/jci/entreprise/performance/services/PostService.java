@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -13,13 +14,12 @@ public interface PostService {
     //Admin
     public ResponseEntity<String>  createPost(Post post);//admin
     public ResponseEntity<String>  deletePost(Long id);//admin
-    public ResponseEntity<String>  updatePost(Post post);//admin
+    public ResponseEntity<String>  updatePost(Post post , Long id);//admin
     public List<Post> getAllPosts(); //admin user
-    public List<Post>getPostByCategory(PostCategory category);//user admin
-    public List<Post>getRecentPost ();//sort
-    public List<Post>getOldestPost ();//sort
-    public List<Post> getPostContains(String characters);
-
-
+    public ResponseEntity<?>getPostById(Long id);//admin
+    public List<Post>getPostByCategory(String category );//user admin
+    public ResponseEntity<?>getPostByName(String name );
+    public List<Post>getRecentPost (Instant date);//sort
+    public List<Post>getOldestPost (Instant date);//sort
 
 }

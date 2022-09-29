@@ -11,5 +11,6 @@ public interface UserService {
     public ResponseEntity<String> createUser(User user);//admin
     public ResponseEntity<String>deleteUser(Long id);//admin
     public ResponseEntity<String>updateUser(User user);//admin
+    public ResponseEntity<?>getUserById(Long id);//admin
     public List<User> getAllUser(); //admin user
 }

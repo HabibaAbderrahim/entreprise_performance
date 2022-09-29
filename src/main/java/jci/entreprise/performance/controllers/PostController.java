@@ -3,6 +3,7 @@ package jci.entreprise.performance.controllers;
 import jci.entreprise.performance.FileUploadResponse;
 import jci.entreprise.performance.entities.Post;
 import jci.entreprise.performance.entities.UploadedFile;
+import jci.entreprise.performance.entities.User;
 import jci.entreprise.performance.services.FileUploadService;
 import jci.entreprise.performance.services.PostService;
 import lombok.AllArgsConstructor;
@@ -11,8 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import java.io.IOException;
+import java.time.Instant;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/post")
@@ -24,15 +26,42 @@ public class PostController {
 
 
 
-    @RequestMapping(path = "/employee", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
+    @RequestMapping(path = "/posts", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<String> savePost(@RequestPart(name = "file") MultipartFile multipartFile , @ModelAttribute Post post) throws IOException {
-
       UploadedFile img = uploadDb1(multipartFile);
       post.setPostImage(img);
-      return postService.createPost(post);
+      return postService.createPost(post); }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable Long id){
+        return postService.deletePost(id);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> update(@RequestBody Post post ,@PathVariable Long id){
+        return postService.updatePost(post , id); }
+    @GetMapping("/getAllPosts")
+    public List<Post> getAllPosts(){
+        return postService.getAllPosts();
+    }
+    @GetMapping("/getOnePostById/{id}")
+    public ResponseEntity<?> getOnePost(@PathVariable Long id){
+        return postService.getPostById(id);
+    }
+    @GetMapping("/getPostByCategory/{category}")
+    public List<Post> getOnePost(@PathVariable String category){
+        return postService.getPostByCategory(category);
+    }
+    @GetMapping("/getPostContains/{character}")
+    public ResponseEntity<?> getPostContains(@PathVariable String character){
+        return postService.getPostByName(character); }
+    @GetMapping("/getRecentPosts/{date}")
+    public List<Post> getRecentPosts(@PathVariable Instant date){
+        return postService.getRecentPost(date);
+    }
+    @GetMapping("/getRecentPosts/{date}")
+    public List<Post> getOldestPosts(@PathVariable Instant date){
+        return postService.getOldestPost(date); }
 
-  }
-
+    //To improve in service
     public UploadedFile uploadDb1(MultipartFile multipartFile)
     {
         UploadedFile uploadedFile = fileUploadService.uploadToDb(multipartFile);
@@ -53,6 +82,7 @@ public class PostController {
         response.setMessage("Oops 1 something went wrong please re-upload.");
         return null;
     }
+
 
 
 }
