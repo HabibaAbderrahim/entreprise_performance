@@ -2,6 +2,7 @@ package jci.entreprise.performance.controllers;
 
 import jci.entreprise.performance.FileUploadResponse;
 import jci.entreprise.performance.entities.Post;
+import jci.entreprise.performance.entities.PostCategory;
 import jci.entreprise.performance.entities.UploadedFile;
 import jci.entreprise.performance.entities.User;
 import jci.entreprise.performance.services.FileUploadService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
+import java.sql.Date;
 import java.time.Instant;
 import java.util.List;
 
@@ -47,18 +49,14 @@ public class PostController {
         return postService.getPostById(id);
     }
     @GetMapping("/getPostByCategory/{category}")
-    public List<Post> getOnePost(@PathVariable String category){
+    public List<Post> getOnePost(@PathVariable PostCategory category){
         return postService.getPostByCategory(category);
     }
     @GetMapping("/getPostContains/{character}")
     public ResponseEntity<?> getPostContains(@PathVariable String character){
         return postService.getPostByName(character); }
-    @GetMapping("/getRecentPosts/{date}")
-    public List<Post> getRecentPosts(@PathVariable Instant date){
-        return postService.getRecentPost(date);
-    }
-    @GetMapping("/getRecentPosts/{date}")
-    public List<Post> getOldestPosts(@PathVariable Instant date){
+    @GetMapping("/getRecentPosts/{date}")//createdDate for testing the API
+    public List<Post> getOldestPosts(@PathVariable String date){
         return postService.getOldestPost(date); }
 
     //To improve in service

@@ -17,9 +17,8 @@ public interface PostService {
     public ResponseEntity<String>  updatePost(Post post , Long id);//admin
     public List<Post> getAllPosts(); //admin user
     public ResponseEntity<?>getPostById(Long id);//admin
-    public List<Post>getPostByCategory(String category );//user admin
+    public List<Post>getPostByCategory(PostCategory category );//user admin
     public ResponseEntity<?>getPostByName(String name );
-    public List<Post>getRecentPost (Instant date);//sort
-    public List<Post>getOldestPost (Instant date);//sort
+    public List<Post>getOldestPost (String date);//sort
 
 }

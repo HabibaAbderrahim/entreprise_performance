@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,20 +43,20 @@ public class PostServiceImpl implements PostService {
     public ResponseEntity<String> updatePost(Post post , Long id) {
         //Find Post
         Optional<Post> oldPost = postRepository.findById(id);
-        if (oldPost.isEmpty()){
-            return ResponseEntity.badRequest().body("There No post !!");
+        if (!oldPost.isEmpty()){
+            //Update Post
+            Post p = oldPost.get();
+            p.setPostName(post.getPostName());
+            p.setDescription(post.getDescription());
+            p.setPostImage(post.getPostImage());
+            p.setUpdatedDate(post.getUpdatedDate());
+            p.setCreatedDate(post.getUpdatedDate());
+            p.setPostCategory(post.getPostCategory());
+            postRepository.save(p);
+            return ResponseEntity.ok().body("Post Updated successfully");
         }
-        //Update Post
-        Post p = oldPost.get();
-        p.setPostName(post.getPostName());
-        p.setDescription(post.getDescription());
-        p.setPostImage(post.getPostImage());
-        p.setUpdatedDate(post.getUpdatedDate());
-        p.setCreatedDate(post.getUpdatedDate());
-        p.setPostCategory(post.getPostCategory());
 
-        postRepository.save(p);
-        return ResponseEntity.ok().body("Post Updated successfully");
+        return ResponseEntity.badRequest().body("There No post !!");
     }
 
     @Override
@@ -73,10 +74,10 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getPostByCategory(String category) {
+    public List<Post> getPostByCategory(PostCategory category) {
         //if category not in Post Category
-        PostCategory cat = PostCategory.findByValue(category);
-        return postRepository.findByPostCategory(cat);
+        //PostCategory cat = PostCategory.findByValue(category);
+        return postRepository.findByPostCategory(category);
 
     }
 
@@ -91,14 +92,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> getRecentPost(Instant date) {
-        return postRepository.findAll(Sort.by(Sort.Direction.ASC , String.valueOf(date)));
-    }
-
-    @Override
-    public List<Post> getOldestPost(Instant date) {
+    public List<Post> getOldestPost(String date) {
         return postRepository.findAll(Sort.by(Sort.Direction.DESC , String.valueOf(date)));
     }
+
+
+
 
 
 }
