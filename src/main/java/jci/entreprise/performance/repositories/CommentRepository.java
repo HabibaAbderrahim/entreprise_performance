@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Date;
 import java.util.List;
 
+
 public interface CommentRepository extends JpaRepository<Comment , Long> {
     public List<Comment> findAll(Sort sort); //arrow
     //public List<Comment> findByOrderByCreateDateDesc();
