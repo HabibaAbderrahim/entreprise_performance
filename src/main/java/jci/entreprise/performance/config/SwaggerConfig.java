@@ -1,3 +1,4 @@
+
 package jci.entreprise.performance.config;
 
 
@@ -27,7 +28,7 @@ public class SwaggerConfig {
                 .build();
 
 
-}
+    }
 
     @Bean
     public WebMvcConfigurer webMvcConfigurer()

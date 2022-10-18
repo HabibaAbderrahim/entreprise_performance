@@ -89,10 +89,5 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-
-    //my user is now usetDetail since it implements UserDetails
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findOneByUsername(username);
-    }
+    
 }

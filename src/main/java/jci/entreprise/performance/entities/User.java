@@ -22,7 +22,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class User implements UserDetails{
+public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long userId ;
@@ -45,33 +45,5 @@ public class User implements UserDetails{
         return "/user-photos/" + userId + "/" + photos;
     }
 
-    //role
-    //convetion Seccurty ROLE_
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("ROLE_"+role));
-        return authorities;
-    }
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
-
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
-
-    //@transient is by default : no column gonna be added
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
 }
