@@ -3,10 +3,11 @@ package jci.entreprise.performance.services;
 import jci.entreprise.performance.entities.Post;
 import jci.entreprise.performance.entities.User;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService extends UserDetailsService{
 
     public ResponseEntity<String> createUser(User user);//admin
     public ResponseEntity<String>deleteUser(Long id);//admin

@@ -10,6 +10,7 @@ import jci.entreprise.performance.services.PostService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -19,6 +20,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/post")
 @AllArgsConstructor
+@PreAuthorize("hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')")
+
 public class PostController {
 
     final private PostService postService ;
@@ -26,33 +29,43 @@ public class PostController {
 
 
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(path = "/posts", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<String> savePost(@RequestPart(name = "image") MultipartFile multipartFile , @ModelAttribute PostDTO post) throws IOException {
       UploadedFile img = uploadDb1(multipartFile);
       post.setPostImage(img);
       return postService.createPost(post); }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         return postService.deletePost(id);
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<String> update(@RequestBody Post post ,@PathVariable Long id){
         return postService.updatePost(post , id); }
+
     @GetMapping("/getAllPosts")
     public List<Post> getAllPosts(){
         return postService.getAllPosts();
     }
+
     @GetMapping("/getOnePostById/{id}")
     public ResponseEntity<?> getOnePost(@PathVariable Long id){
         return postService.getPostById(id);
     }
+
     @GetMapping("/getPostByCategory/{category}")
     public List<Post> getOnePost(@PathVariable PostCategory category){
         return postService.getPostByCategory(category);
     }
+
     @GetMapping("/getPostContains/{character}")
     public ResponseEntity<?> getPostContains(@PathVariable String character){
         return postService.getPostByName(character); }
+
     @GetMapping("/getRecentPosts/{date}")//createdDate for testing the API
     public List<Post> getOldestPosts(@PathVariable String date){
         return postService.getOldestPost(date); }

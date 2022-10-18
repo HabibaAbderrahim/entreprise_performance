@@ -19,10 +19,7 @@ public class PerformanceApplication {
 		System.out.println("Hello");
 	}
 
-		@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
+
 
 	@Bean(name = "multipartResolver")
 	public CommonsMultipartResolver multipartResolver() {
