@@ -1,4 +1,4 @@
-package jci.entreprise.performance;
+package jci.entreprise.performance.DTO;
 
 public class FileUploadResponse {
 

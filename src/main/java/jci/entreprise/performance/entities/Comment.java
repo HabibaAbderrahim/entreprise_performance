@@ -33,4 +33,43 @@ public class Comment  implements Serializable {
     @JoinColumn(name = "postId" , referencedColumnName = "postId")
     private Post post ;
 
+    public Long getComId() {
+        return comId;
+    }
+
+    public void setComId(Long comId) {
+        this.comId = comId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Instant getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Instant createDate) {
+        this.createDate = createDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
+    }
 }

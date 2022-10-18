@@ -1,6 +1,6 @@
 package jci.entreprise.performance.controllers;
 
-import jci.entreprise.performance.FileUploadResponse;
+import jci.entreprise.performance.DTO.FileUploadResponse;
 import jci.entreprise.performance.entities.UploadedFile;
 import jci.entreprise.performance.services.FileUploadService;
 import org.springframework.beans.factory.annotation.Autowired;

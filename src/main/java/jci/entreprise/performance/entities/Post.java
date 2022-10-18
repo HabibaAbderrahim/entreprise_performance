@@ -48,7 +48,71 @@ public class Post  implements Serializable {
     @JsonIgnoreProperties({ "createDate", "role","password","username" })
     private  User user ;
 
-    /*@ManyToMany(fetch = FetchType.EAGER)
+    public Long getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Long postId) {
+        this.postId = postId;
+    }
+
+    public String getPostName() {
+        return postName;
+    }
+
+    public void setPostName(String postName) {
+        this.postName = postName;
+    }
+
+    public Instant getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Instant createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public Instant getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(Instant updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public UploadedFile getPostImage() {
+        return postImage;
+    }
+
+    public void setPostImage(UploadedFile postImage) {
+        this.postImage = postImage;
+    }
+
+    public PostCategory getPostCategory() {
+        return postCategory;
+    }
+
+    public void setPostCategory(PostCategory postCategory) {
+        this.postCategory = postCategory;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+/*@ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "post_images",
     joinColumns = {
             @JoinColumn(name = "post_id")

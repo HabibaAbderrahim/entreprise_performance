@@ -1,8 +1,13 @@
 package jci.entreprise.performance.services.impl;
 
+import jci.entreprise.performance.DTO.PostDTO;
 import jci.entreprise.performance.entities.Post;
 import jci.entreprise.performance.entities.PostCategory;
+import jci.entreprise.performance.entities.UploadedFile;
+import jci.entreprise.performance.entities.User;
+import jci.entreprise.performance.mapper.PostMapper;
 import jci.entreprise.performance.repositories.PostRepository;
+import jci.entreprise.performance.repositories.UserRepository;
 import jci.entreprise.performance.services.FileUploadService;
 import jci.entreprise.performance.services.PostService;
 import lombok.AllArgsConstructor;
@@ -11,8 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +24,18 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
     final private PostRepository postRepository;
     final private FileUploadService fileUploadService;
+    final private UserRepository userRepository ;
+    final private PostMapper postMapper ;
     @Override
-    public ResponseEntity<String> createPost(Post post) {
+    public ResponseEntity<String> createPost(PostDTO postDTO) {
+
+        //user
+        User user = userRepository.findById(postDTO.getUserId()).orElseThrow(() -> new IllegalArgumentException("Not found"));
+
+        Post post = postMapper.map(postDTO , user);
 
         postRepository.save(post);
         return ResponseEntity.status(HttpStatus.OK).body("Post saved successfully") ;
-
     }
 
     @Override

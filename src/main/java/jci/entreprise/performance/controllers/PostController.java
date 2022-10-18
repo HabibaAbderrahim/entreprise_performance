@@ -1,10 +1,10 @@
 package jci.entreprise.performance.controllers;
 
-import jci.entreprise.performance.FileUploadResponse;
+import jci.entreprise.performance.DTO.FileUploadResponse;
+import jci.entreprise.performance.DTO.PostDTO;
 import jci.entreprise.performance.entities.Post;
 import jci.entreprise.performance.entities.PostCategory;
 import jci.entreprise.performance.entities.UploadedFile;
-import jci.entreprise.performance.entities.User;
 import jci.entreprise.performance.services.FileUploadService;
 import jci.entreprise.performance.services.PostService;
 import lombok.AllArgsConstructor;
@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.io.IOException;
-import java.sql.Date;
-import java.time.Instant;
 import java.util.List;
 
 @RestController
@@ -29,7 +27,7 @@ public class PostController {
 
 
     @RequestMapping(path = "/posts", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
-    public ResponseEntity<String> savePost(@RequestPart(name = "file") MultipartFile multipartFile , @ModelAttribute Post post) throws IOException {
+    public ResponseEntity<String> savePost(@RequestPart(name = "image") MultipartFile multipartFile , @ModelAttribute PostDTO post) throws IOException {
       UploadedFile img = uploadDb1(multipartFile);
       post.setPostImage(img);
       return postService.createPost(post); }
