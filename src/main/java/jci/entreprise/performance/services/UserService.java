@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
 
-public interface UserService {
+public interface UserService  extends UserDetailsService{
 
     public ResponseEntity<String> createUser(User user);//admin
     public ResponseEntity<String>deleteUser(Long id);//admin

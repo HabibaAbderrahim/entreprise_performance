@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private  UserRepository userRepository;
-    @Autowired
+
     private  PasswordEncoder passwordEncoder ;
     @Override
     public ResponseEntity<String> createUser(User user) {
@@ -89,5 +89,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
-    
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return (UserDetails) userRepository.findOneByUsername(username);
+    }
 }
