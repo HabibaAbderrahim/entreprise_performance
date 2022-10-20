@@ -35,12 +35,12 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2).select()
                 //BasePACKAGE CHANGE
                 .apis(RequestHandlerSelectors.basePackage("jci.entreprise.performance.controllers"))
-                .paths(PathSelectors.any())
-                .build().securityContexts(Lists.newArrayList(securityContext()))
-                .securitySchemes(Lists.newArrayList(apiKey()));
+                .paths(PathSelectors.any()).build();
+                //.build().securityContexts(Lists.newArrayList(securityContext()))
+                //.securitySchemes(Lists.newArrayList(apiKey()));
     }
 
-    private ApiKey apiKey() {
+    /*private ApiKey apiKey() {
         return new ApiKey("JWT", AUTHORIZATION_HEADER, "header");
     }
 
@@ -54,7 +54,7 @@ public class SwaggerConfig {
         authorizationScopes[0] = authorizationScope;
         return Lists.newArrayList(new SecurityReference("JWT", authorizationScopes));
     }
-
+*/
 
     @Bean
     public WebMvcConfigurer webMvcConfigurer()

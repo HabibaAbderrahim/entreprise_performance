@@ -1,8 +1,9 @@
-package jci.entreprise.performance.config;
+/*package jci.entreprise.performance.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jci.entreprise.performance.entities.Person;
 import jci.entreprise.performance.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,12 +44,12 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
-        User usera = new User();
+        Person usera = new Person();
         //request traja3 json lezem nraj3 objet (user)
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            usera = mapper.readValue(request.getInputStream(), User.class);
+            usera = mapper.readValue(request.getInputStream(), Person.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,3 +79,4 @@ public class JwtAuthentificationFilter extends UsernamePasswordAuthenticationFil
         response.addHeader(header , prefix+token);
     }
 }
+*/

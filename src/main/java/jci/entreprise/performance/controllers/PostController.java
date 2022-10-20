@@ -20,7 +20,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/post")
 @AllArgsConstructor
-@PreAuthorize("hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')")
+//@PreAuthorize("hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')")
 
 public class PostController {
 
@@ -29,20 +29,20 @@ public class PostController {
 
 
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+   // @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(path = "/posts", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<String> savePost(@RequestPart(name = "image") MultipartFile multipartFile , @ModelAttribute PostDTO post) throws IOException {
       UploadedFile img = uploadDb1(multipartFile);
       post.setPostImage(img);
       return postService.createPost(post); }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id){
         return postService.deletePost(id);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    //@PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<String> update(@RequestBody Post post ,@PathVariable Long id){
         return postService.updatePost(post , id); }

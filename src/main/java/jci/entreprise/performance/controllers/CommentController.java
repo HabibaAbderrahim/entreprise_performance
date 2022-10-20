@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/comments/")
 @AllArgsConstructor
-@PreAuthorize("hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')")
+//@PreAuthorize("hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')")
 public class CommentController {
     private final CommentService commentService;
     @PostMapping

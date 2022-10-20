@@ -52,20 +52,19 @@ public class PostServiceImpl implements PostService {
     public ResponseEntity<String> updatePost(Post post , Long id) {
         //Find Post
         Optional<Post> oldPost = postRepository.findById(id);
-        if (!oldPost.isEmpty()){
-            //Update Post
-            Post p = oldPost.get();
-            p.setPostName(post.getPostName());
-            p.setDescription(post.getDescription());
-            p.setPostImage(post.getPostImage());
-            p.setUpdatedDate(post.getUpdatedDate());
-            p.setCreatedDate(post.getUpdatedDate());
-            p.setPostCategory(post.getPostCategory());
-            postRepository.save(p);
-            return ResponseEntity.ok().body("Post Updated successfully");
+        if (oldPost.isEmpty()){
+            return ResponseEntity.badRequest().body("There No post To Update !!");
         }
+        Post p = oldPost.get();
+        p.setPostName(post.getPostName());
+        p.setDescription(post.getDescription());
+        p.setPostImage(post.getPostImage());
+        p.setUpdatedDate(post.getUpdatedDate());
+        p.setCreatedDate(post.getUpdatedDate());
+        p.setPostCategory(post.getPostCategory());
+        postRepository.save(p);
+        return ResponseEntity.ok().body("Post Updated successfully");
 
-        return ResponseEntity.badRequest().body("There No post !!");
     }
 
     @Override

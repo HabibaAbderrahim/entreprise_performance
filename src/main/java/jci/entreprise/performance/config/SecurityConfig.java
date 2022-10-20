@@ -1,9 +1,12 @@
-package jci.entreprise.performance.config;
+/*package jci.entreprise.performance.config;
 
+import jci.entreprise.performance.entities.Person;
+import jci.entreprise.performance.services.PersonService;
 import jci.entreprise.performance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -23,7 +26,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-    private UserService usersService ;
+    private PersonService usersService ;
 
     //Avant liaison avec base statique an d for test
     @Override
@@ -46,7 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //Gere session spring security
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         //7alit  el la3b 3al login login accesible lel ness el kol
-        http.authorizeRequests().antMatchers("/login").permitAll();
+        http.authorizeRequests().antMatchers("/login").permitAll().antMatchers(HttpMethod.POST, "/api/user/**")
+                .permitAll();
+
 
         //bech nal3eb aal access le requet mte3i
         //ay requet apart el login bech tlansiha lezemha authentification
@@ -84,12 +89,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //Filter authenticatian
 
-    public UserService getUserDetailsService() {
+    public PersonService getUserDetailsService() {
         return usersService;
     }
 
     @Autowired
-    public void setUserDetailsService(UserService userDetailsService) {
+    public void setUserDetailsService(PersonService userDetailsService) {
         this.usersService= userDetailsService;
     }
 
@@ -107,3 +112,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 }
 
+*/

@@ -1,5 +1,6 @@
 package jci.entreprise.performance.services.impl;
 
+import jci.entreprise.performance.DTO.LoginDTO;
 import jci.entreprise.performance.entities.User;
 import jci.entreprise.performance.repositories.UserRepository;
 import jci.entreprise.performance.services.UserService;
@@ -21,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private  UserRepository userRepository;
-
+    @Autowired
     private  PasswordEncoder passwordEncoder ;
     @Override
     public ResponseEntity<String> createUser(User user) {
@@ -41,6 +42,7 @@ public class UserServiceImpl implements UserService {
         return ResponseEntity.ok().body("New user added succefully");
     }
 
+
     @Override
     public ResponseEntity<String> deleteUser(Long id) {
 
@@ -55,12 +57,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseEntity<String> updateUser(User user) {
 
-        if( !(userRepository.existsByEmailAndUserId(user.getEmail(),user.getUserId()))){
-            if(userRepository.existsByEmail(user.getEmail())){
-                return  ResponseEntity.badRequest().body("This Useremail  exist  , choose another @!!");
-
-            }
-        }
         if( !(userRepository.existsByUsernameAndUserId(user.getUsername(),user.getUserId()))){
             if(userRepository.existsByUsername(user.getUsername())){
                 return  ResponseEntity.badRequest().body("This Username exist , choose another name!!");
@@ -90,8 +86,5 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return (UserDetails) userRepository.findOneByUsername(username);
-    }
+
 }
