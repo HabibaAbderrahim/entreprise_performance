@@ -29,7 +29,7 @@ public class PostController {
 
 
 
-   // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(path = "/posts", method = RequestMethod.POST, consumes = { MediaType.MULTIPART_FORM_DATA_VALUE })
     public ResponseEntity<String> savePost(@RequestPart(name = "image") MultipartFile multipartFile , @ModelAttribute PostDTO post) throws IOException {
       UploadedFile img = uploadDb1(multipartFile);
@@ -52,6 +52,7 @@ public class PostController {
         return postService.getAllPosts();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/getOnePostById/{id}")
     public ResponseEntity<?> getOnePost(@PathVariable Long id){
         return postService.getPostById(id);

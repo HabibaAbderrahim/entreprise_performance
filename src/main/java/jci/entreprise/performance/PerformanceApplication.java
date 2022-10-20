@@ -27,9 +27,5 @@ public class PerformanceApplication {
 		multipartResolver.setMaxUploadSize(100000);
 		return multipartResolver;
 	}
-	@Bean
-	public PasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder();
-	}
 
 }

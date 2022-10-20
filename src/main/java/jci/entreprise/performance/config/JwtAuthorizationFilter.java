@@ -1,4 +1,4 @@
-/*package jci.entreprise.performance.config;
+package jci.entreprise.performance.config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -51,4 +51,3 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
     }
 }
-*/

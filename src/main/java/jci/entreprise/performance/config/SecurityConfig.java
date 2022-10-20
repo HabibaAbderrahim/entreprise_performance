@@ -1,7 +1,6 @@
-/*package jci.entreprise.performance.config;
+package jci.entreprise.performance.config;
 
-import jci.entreprise.performance.entities.Person;
-import jci.entreprise.performance.services.PersonService;
+
 import jci.entreprise.performance.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,7 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-    private PersonService usersService ;
+    private UserService usersService ;
 
     //Avant liaison avec base statique an d for test
     @Override
@@ -49,8 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //Gere session spring security
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         //7alit  el la3b 3al login login accesible lel ness el kol
-        http.authorizeRequests().antMatchers("/login").permitAll().antMatchers(HttpMethod.POST, "/api/user/**")
-                .permitAll();
+        http.authorizeRequests().antMatchers("/login").permitAll();
 
 
         //bech nal3eb aal access le requet mte3i
@@ -89,12 +87,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //Filter authenticatian
 
-    public PersonService getUserDetailsService() {
+    public UserService getUserDetailsService() {
         return usersService;
     }
 
     @Autowired
-    public void setUserDetailsService(PersonService userDetailsService) {
+    public void setUserDetailsService(UserService userDetailsService) {
         this.usersService= userDetailsService;
     }
 
@@ -112,4 +110,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 }
 
-*/

@@ -1,10 +1,7 @@
 package jci.entreprise.performance.mapper;
 
-import jci.entreprise.performance.DTO.CommentDTO;
 import jci.entreprise.performance.DTO.PostDTO;
-import jci.entreprise.performance.entities.Comment;
 import jci.entreprise.performance.entities.Post;
-import jci.entreprise.performance.entities.UploadedFile;
 import jci.entreprise.performance.entities.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -22,7 +19,5 @@ public interface PostMapper {
     Post map(PostDTO postDTO, User user);
 
     @Mapping(target = "userId", expression = "java(post.getUser().getUserId())")
-    PostDTO mapToDto(Post post);
+    PostDTO mapToDto(Post post);}
 
-
-}

@@ -1,5 +1,6 @@
 package jci.entreprise.performance.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
@@ -22,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class User implements Serializable{
+public class User implements Serializable , UserDetails{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long userId ;
@@ -37,11 +38,47 @@ public class User implements Serializable{
     @Nullable
     private Instant createDate ;
     private String role ;
+
     @Transient
     public String getPhotosImagePath() {
         if (photos == null || userId == null) return null;
 
         return "/user-photos/" + userId + "/" + photos;
+    }
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        authorities.add(new SimpleGrantedAuthority("ROLE_"+ role));
+        return authorities;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @JsonIgnore
+    @Override
+    public boolean isEnabled() {
+        // TODO Auto-generated method stub
+        return true;
     }
 
 

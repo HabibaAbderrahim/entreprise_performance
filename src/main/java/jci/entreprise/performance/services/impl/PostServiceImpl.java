@@ -53,7 +53,7 @@ public class PostServiceImpl implements PostService {
         //Find Post
         Optional<Post> oldPost = postRepository.findById(id);
         if (oldPost.isEmpty()){
-            return ResponseEntity.badRequest().body("There No post To Update !!");
+            return ResponseEntity.badRequest().body("There No post !!");
         }
         Post p = oldPost.get();
         p.setPostName(post.getPostName());
