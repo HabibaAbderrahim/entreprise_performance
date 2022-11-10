@@ -10,7 +10,7 @@ public interface CommentService {
 
     public ResponseEntity<String> createComment(CommentDTO commentDTO);
     public ResponseEntity<String>  deleteComment (Long id);
-    public boolean containsSwearWords(String comment);
+    public ResponseEntity<String> containsSwearWords(String comment);
     public List<Comment> getAllComments();
     public List<Comment> getUserComment(Long userId);
     public List<Comment> getAllCommInPost(Long postId);

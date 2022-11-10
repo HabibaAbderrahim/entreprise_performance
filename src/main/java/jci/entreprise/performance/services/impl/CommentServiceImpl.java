@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,12 +44,28 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public ResponseEntity<String> deleteComment(Long id) {
 
-        return null;
+        Comment comment = new Comment();
+
+        if(comment.getComId() != id){
+
+            return ResponseEntity.badRequest().body("There is no comment to delete") ;
+
+        }
+
+        commentRepository.deleteById(id);
+
+        return ResponseEntity.ok().body("deleted with success !");
     }
 
     @Override
-    public boolean containsSwearWords(String comment) {
-        return false;
+    public ResponseEntity<String> containsSwearWords(String comment) {
+
+        //Swear Worrds
+        List<String> swearList ;
+        if(comment.contains("FFF")){
+            return ResponseEntity.badRequest().body("contains swear words");
+        }
+        return ResponseEntity.ok().body("Verified");
     }
 
     @Override
