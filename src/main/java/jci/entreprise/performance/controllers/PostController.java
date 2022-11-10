@@ -58,15 +58,16 @@ public class PostController {
         return postService.getPostById(id);
     }
 
+    //User and Admin
     @GetMapping("/getPostByCategory/{category}")
     public List<Post> getOnePost(@PathVariable PostCategory category){
         return postService.getPostByCategory(category);
     }
-
+    //User and Admin
     @GetMapping("/getPostContains/{character}")
     public ResponseEntity<?> getPostContains(@PathVariable String character){
         return postService.getPostByName(character); }
-
+    //User and Admin
     @GetMapping("/getRecentPosts/{date}")//createdDate for testing the API
     public List<Post> getOldestPosts(@PathVariable String date){
         return postService.getOldestPost(date); }

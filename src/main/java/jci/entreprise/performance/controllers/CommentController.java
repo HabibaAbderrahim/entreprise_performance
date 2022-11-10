@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @AllArgsConstructor
 //@PreAuthorize("hasAnyRole('ROLE_ADMIN' , 'ROLE_USER')")
 public class CommentController {
+
     private final CommentService commentService;
+
+    //For User and Admiin
     @PostMapping
     public ResponseEntity<String> createComment(@RequestBody CommentDTO commentDTO) {
         return commentService.createComment(commentDTO)  ;
